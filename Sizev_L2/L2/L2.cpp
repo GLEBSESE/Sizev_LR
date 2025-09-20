@@ -1,7 +1,9 @@
-﻿#include <iostream>
+﻿// L#include <iostream>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -12,27 +14,25 @@ public:
         string name, properties;
         double length, width;
         cin >> name >> length >> width >> properties;
-        name_ = name;
-        properties_ = properties;
-        length_ = length;
-        width_ = width;
+        Pipes_[name] = { length,width,properties };
     }
     void View() {
-        if (name_.empty()) {
+        if (Pipes_.empty()) {
             cout << "Труба не найдена, добавьте трубу" << endl;
         }
         else {
-            cout << "Название: " << name_ << ", длина: " << length_ << " ширина: " << width_ << " признак: " << properties_ << endl;
+            cout << "Трубы:" << endl;
+            for (const auto& pipe : Pipes_) {
+                cout << "Название: " << pipe.first << ", длина: " << pipe.second.length_ << " ширина: " << pipe.second.width_ << " признак: " << pipe.second.properties_ << endl;
+            }
         }
     }
-    void Edit() {
-        if (name_.empty()) {
+    void Edit(string name_pipe) {
+        if (Pipes_.empty()) {
             cout << "Труба не найдена, добавьте трубу" << endl;
         }
         else {
-            string properties;
-            cin >> properties;
-            properties_ = properties;
+            Pipes_.at(name_pipe).
         }
     }
     void input_file() {
@@ -56,10 +56,13 @@ public:
         out.close();
     }
 private:
-    string name_;
-    double length_;
-    double width_;
-    string properties_;
+    struct Pipes_stats
+    {
+        double length_;
+        double width_;
+        string properties_;
+    };
+    map<string, Pipes_stats> Pipes_;
 };
 
 class KS {
@@ -112,10 +115,13 @@ public:
         out.close();
     }
 private:
-    string name_;
-    int quantity_;
-    int count_work_;
-    string station_class_;
+    struct KS_stats
+    {
+        int quantity_;
+        int count_work_;
+        string station_class_;
+    };
+    map<string, KS_stats> KS_;
 };
 
 int main()
