@@ -5,17 +5,59 @@
 
 using namespace std;
 
+#define INPUT_LINE(in, str) getline(in>>std::ws, str); \
+						std::cerr << str << std::endl
+
+#define PRINT_PARAM(out, x) out<< #x << "=" << x << std::endl
+
+class redirect_output_wrapper
+{
+    std::ostream& stream;
+    std::streambuf* const old_buf;
+public:
+    redirect_output_wrapper(std::ostream& src)
+        :old_buf(src.rdbuf()), stream(src)
+    {
+    }
+
+    ~redirect_output_wrapper() {
+        stream.rdbuf(old_buf);
+    }
+    void redirect(std::ostream& dest)
+    {
+        stream.rdbuf(dest.rdbuf());
+    }
+};
+
+
+
+template <typename T>
+T GetCorrectNumber(T min, T max)
+{
+    T x;
+    while ((std::cin >> x).fail()	// check type
+        || std::cin.peek() != '\n'	// is buffer empty (int/float check)
+        || x < min || x > max)		// check range
+    {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        std::cout << "Type number (" << min << "-" << max << "):";
+    }
+    std::cerr << x << std::endl;
+    return x;
+}
 
 class Pipes {
 public:
     void add() {
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "Введите название трубы: ";
-        getline(cin, _name);
-        cout << "Введите размеры трубы (сначала длину, потом ширину): ";
-        cin >> _length >> _width;
+        INPUT_LINE(cin, _name);
+        cout << "Введите размеры трубы (длину): ";
+        _length = GetCorrectNumber(0, 100000);
+        cout << "Введите размеры трубы (ширину): ";
+        _width = GetCorrectNumber(0, 100000);
         cout << "Введите работает ли труба(1 - работает, 0 - в ремонте): ";
-        cin >> _properties;
+        _properties = GetCorrectNumber(0, 1);
     }
     void View() {
         if (_name.empty()) {
@@ -30,8 +72,8 @@ public:
             cout << "Труба не найдена, добавьте трубу" << endl;
         }
         else {
-            cout << "Введите работает ли труба(1 - работает, 2 - в ремонте)" << endl;
-            cin >> _properties;
+            cout << "Введите работает ли труба(1 - работает, 0 - в ремонте)" << endl;
+            _properties = GetCorrectNumber(0, 1)
         }
     }
     void output_file() {
@@ -65,13 +107,14 @@ private:
 class KS {
 public:
     void add() {
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "Введите название КС: ";
-        getline(cin, _name);
-        cout << "Введите количество цехов, потом количество цехов в работе: ";
-        cin >> _quantity >> _count_work;
+        INPUT_LINE(cin, _name);
+        cout << "Введите количество цехов: ";
+        _quantity = GetCorrectNumber(0, 100000);
+        cout << "Введите количество цехов в работе: ";
+        _count_work = GetCorrectNumber(0, 100000);
         cout << "Введите запуск КС(1 - запустить, 0 - остановка): ";
-        cin >> _station_class;
+        _station_class = GetCorrectNumber(0, 1);
     }
     void View() {
         if (_name.empty()) {
@@ -87,7 +130,7 @@ public:
         }
         else {
             cout << "Введите запуск КС(1 - запустить, 0 - остановка)" << endl;
-            cin >> _station_class;
+            _station_class = GetCorrectNumber(1, 0);
         }
     }
     void output_file() {
@@ -115,9 +158,7 @@ int main()
     KS KS_;
     while (true) {
         cout << "1. Добавить трубу 2. Добавить КС 3. Просмотр всех объектов 4. Редактировать трубу 5. Редактировать КС 6. Сохранить 7. Загрузить 0. Выход" << endl;
-        int menu_result;
-        cin >> menu_result;
-        switch (menu_result) {
+        switch (GetCorrectNumber(0, 7)) {
         case 0:
             cout << "Вы закончили цикл" << endl;
             exit(0);
@@ -143,9 +184,6 @@ int main()
             break;
         case 7:
             pipe_.input_file();
-            break;
-        default:
-            cout << "Нет подходящего номера в меню" << endl;
             break;
         }
     }
