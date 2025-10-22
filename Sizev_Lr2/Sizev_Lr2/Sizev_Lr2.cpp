@@ -1,45 +1,46 @@
-ï»¿#include "Sizev_Pipe_KS.h"
+#include "KC.h"
 using namespace std;
+
 
 int main()
 {
     setlocale(LC_ALL, "");
-    Pipes pipe_;
-    KS KS_;
+    KC kc;
+    Pipes pipe;
     while (true) {
-        cout << "1. Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÑƒÐ±Ñƒ 2. Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐšÐ¡ 3. ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð²ÑÐµÑ… Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð² 4. ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ñ‚Ñ€ÑƒÐ± Ð¿Ð¾ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€Ñƒ 5. ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ ÐšÐ¡ Ð¿Ð¾ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€Ñƒ 6. Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ‚Ñ€ÑƒÐ±Ñƒ 7. Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐšÐ¡ 8. Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ 9. Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ 0. Ð’Ñ‹Ñ…Ð¾Ð´" << endl;
-        switch (GetCorrectNumber(0, 7)) {
+        cout << "1. Äîáàâèòü òðóáó 2. Äîáàâèòü ÊÑ 3. Ïðîñìîòð âñåõ îáúåêòîâ 4. Ïðîñìîòð òðóá ïî ôèëüòðó 5. Ïðîñìîòð ÊÑ ïî ôèëüòðó 6. Ðåäàêòèðîâàòü òðóáó 7. Ðåäàêòèðîâàòü ÊÑ 8. Ñîõðàíèòü 9. Çàãðóçèòü 0. Âûõîä" << endl;
+        switch (GetCorrectNumber(0, 9)) {
         case 0:
-            cout << "Ð’Ñ‹ Ð·Ð°ÐºÐ¾Ð½Ñ‡Ð¸Ð»Ð¸ Ñ†Ð¸ÐºÐ»" << endl;
+            cout << "Âû çàêîí÷èëè öèêë" << endl;
             exit(0);
         case 1:
-            pipe_.add();
+            pipe.add();
             break;
         case 2:
-            KS_.add();
+            kc.add();
             break;
         case 3:
-            pipe_.View();
-            KS_.View();
+            pipe.View();
+            kc.View();
             break;
         case 4:
-            pipe_.View_Filter();
+            pipe.View_Filter();
             break;
         case 5:
-            KS_.View_Filter();
+            kc.View_Filter();
             break;
         case 6:
-            pipe_.Edit();
+            pipe.Edit();
             break;
         case 7:
-            KS_.Edit();
+            kc.Edit();
             break;
         case 8:
-            pipe_.output_file();
-            KS_.output_file();
+            pipe.output_file();
+            kc.output_file();
             break;
         case 9:
-            pipe_.input_file();
+            pipe.input_file();
             break;
         }
     }

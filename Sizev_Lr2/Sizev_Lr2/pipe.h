@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+
 using namespace std;
 
 #define INPUT_LINE(in, str) getline(in>>std::ws, str);
@@ -47,7 +48,6 @@ T GetCorrectNumber(T min, T max)
     return x;
 }
 
-
 class Pipes {
 public:
     void add();
@@ -57,31 +57,13 @@ public:
     void output_file() const;
     void input_file() const;
 private:
-    struct MyPipe
+    struct mypipe
     {
         string _name;
         int _length;
         int _width;
         bool _properties;
     };
-    int _size = 0;
-    map<int, MyPipe> _Pipes;
-};
-
-class KS {
-public:
-    void add();
-    void View() const;
-    void View_Filter() const;
-    void Edit();
-    void output_file() const;
-private:
-    struct MyKs {
-        string _name;
-        int _quantity;
-        int _count_work;
-        bool _station_class;
-    };
-    int _size = 0;
-    map<int, MyKs> _Ks;
+    map<int, mypipe> _pipe;
+    int size_pipe = 0;
 };

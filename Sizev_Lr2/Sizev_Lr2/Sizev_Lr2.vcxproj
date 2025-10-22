@@ -124,11 +124,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KC.cpp" />
+    <ClCompile Include="pipe.cpp" />
     <ClCompile Include="Sizev_Lr2.cpp" />
-    <ClCompile Include="Sizev_Pipe_KS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sizev_Pipe_KS.h" />
+    <ClInclude Include="KC.h" />
+    <ClInclude Include="pipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
