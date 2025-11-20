@@ -3,19 +3,16 @@
 
 class KC {
 private:
-    struct MyKC
-    {
-        string _name;
-        int _quantity;
-        int _count_work;
-        bool _station_class;
-    };
-    map<int, MyKC> _KC;
-    int size_KC = 0;
+    string _name;
+    int _quantity;
+    int _count_work;
+    bool _station_class;
 public:
     void add();
     void View() const;
-    void View_Filter() const;
     void Edit();
-    void output_file() const;
+    bool CheakByName(string name);
+    void SaveKC(ofstream& fin);
+    void LoadKC(ifstream& fout);
+    double CheackIdleWorkshops();
 };

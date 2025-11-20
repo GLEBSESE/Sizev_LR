@@ -132,6 +132,10 @@
     <ClInclude Include="KC.h" />
     <ClInclude Include="pipe.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="KC_data.txt" />
+    <Text Include="Pipe_data.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

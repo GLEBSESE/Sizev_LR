@@ -8,9 +8,11 @@
 
 using namespace std;
 
-#define INPUT_LINE(in, str) getline(in>>std::ws, str);
+#define INPUT_LINE(in, str) getline(in>>std::ws, str); \
+						std::cerr << str << std::endl
 
 #define PRINT_PARAM(out, x) out<< #x << "=" << x << std::endl
+
 
 class redirect_output_wrapper
 {
@@ -52,18 +54,14 @@ class Pipes {
 public:
     void add();
     void View() const;
-    void View_Filter() const;
     void Edit();
-    void output_file() const;
-    void input_file() const;
+    bool CheakByProperities(const bool properties);
+    bool CheakByName(const string name);
+    void SavePipe(ofstream& fout);
+    void LoadPipe(ifstream& fin);
 private:
-    struct mypipe
-    {
-        string _name;
-        int _length;
-        int _width;
-        bool _properties;
-    };
-    map<int, mypipe> _pipe;
-    int size_pipe = 0;
+    string _name;
+    int _length;
+    int _width;
+    bool _properties;
 };
