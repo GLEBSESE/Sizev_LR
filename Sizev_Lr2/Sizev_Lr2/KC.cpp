@@ -33,6 +33,6 @@ void KC::Edit() {
 
 }
 
-double KC::CheackIdleWorkshops() {
+double KC::IdleWorkshops() {
     return (static_cast<double>(_quantity - _count_work) / _quantity) * 100.0;
 }

@@ -1,9 +1,9 @@
 #include "KC.h"
-using namespace std;
-
 #include <chrono>
 #include <format>
+#include <string>
 
+using namespace std;
 using namespace chrono;
 
 int size_kc = 0;
@@ -49,9 +49,18 @@ void FilterKC(map<int, KC>& kc) {
         cout << "введите число (филтровать по 0 - названию, 1 - по  проценту незадействованных цехов)" << endl;
         bool cheak = GetCorrectNumber(0, 1);
         if (cheak) {
+            cout << "Введите процент незадействованных цехов: " << endl;
+            int Idle = GetCorrectNumber(0, 100);
+            for (int i = 0; i < size_kc; i++) {
+                if (kc.at(i).IdleWorkshops() < Idle) {
+                    cout << "Номер кс: " << i;
+                    kc.at(i).View();
+                }
+            }
+
         }
         else {
-            cout << "введите имя трубы: " << endl;
+            cout << "Введите имя трубы: " << endl;
             string name;
             INPUT_LINE(cin, name);
             for (int i = 0; i < size_pipe; i++) {
@@ -128,6 +137,7 @@ void EditKC(map<int, KC>& kc) {
             bool del = GetCorrectNumber(0, 1);
             if (!del) {
                 kc.clear();
+                cout << "Все КС удалены" << endl;
             }
             else {
                 bool d = 1;
@@ -181,10 +191,10 @@ void LoadAll(map<int, Pipes>& pipe, map<int, KC>& kc) {
     if (fin_pipe.is_open()) {
         int count;
         fin_pipe >> count;
-        cout << size_pipe << endl;
         while (count--) {
             pipe[size_pipe++].LoadPipe(fin_pipe);
         }
+        cout << "Все трубы были успешно загружены!!!" << endl;
     }
     ifstream fin_kc;
     fin_kc.open("KC_data.txt", ios::in);
@@ -195,6 +205,7 @@ void LoadAll(map<int, Pipes>& pipe, map<int, KC>& kc) {
             kc[size_kc++].LoadKC(fin_kc);
 
         }
+        cout << "Все КС были успешно загружены!!!" << endl;
     }
 }
 void PrintKcPipe(map<int, Pipes>& pipe, map<int, KC>& kc) {
@@ -221,11 +232,11 @@ void PrintKcPipe(map<int, Pipes>& pipe, map<int, KC>& kc) {
 
 int main()
 {
-    //redirect_output_wrapper cerr_out(cerr);
-    //string time = std::format("{:%d_%m_%Y %H_%M_%OS}", system_clock::now());
-    //ofstream logfile("log_" + time);
-    //if (logfile)
-    //    cerr_out.redirect(logfile);
+    redirect_output_wrapper cerr_out(cerr);
+    string time = format("{:%d_%m_%Y %H_%M_%OS}", system_clock::now());
+    ofstream logfile("log_" + time);
+    if (logfile)
+        cerr_out.redirect(logfile);
     setlocale(LC_ALL, "");
     map<int, KC> kc;
     map<int, Pipes> pipe;

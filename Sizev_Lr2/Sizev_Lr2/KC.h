@@ -14,5 +14,5 @@ public:
     bool CheakByName(string name);
     void SaveKC(ofstream& fin);
     void LoadKC(ifstream& fout);
-    double CheackIdleWorkshops();
+    double IdleWorkshops();
 };

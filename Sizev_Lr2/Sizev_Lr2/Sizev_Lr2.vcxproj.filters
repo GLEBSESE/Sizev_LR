@@ -32,6 +32,9 @@
     <ClInclude Include="pipe.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="KC_data.txt">
