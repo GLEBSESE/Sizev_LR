@@ -232,9 +232,17 @@ void PrintKcPipe(map<int, Pipes>& pipe, map<int, KC>& kc) {
 
 int main()
 {
+    auto now = system_clock::now();
+    time_t now_c = system_clock::to_time_t(now);
+    tm tm;
+    localtime_s(&tm, &now_c);
     redirect_output_wrapper cerr_out(cerr);
-    string time = format("{:%d_%m_%Y %H_%M_%OS}", system_clock::now());
-    ofstream logfile("log_" + time);
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%d_%m_%Y_%H_%M_%S");
+    std::string time = oss.str();
+
+    ofstream logfile("log_" + time + ".txt");
     if (logfile)
         cerr_out.redirect(logfile);
     setlocale(LC_ALL, "");

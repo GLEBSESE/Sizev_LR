@@ -10,7 +10,7 @@
 #define INPUT_LINE(in, str) getline(in>>std::ws, str); 
 
 #define PRINT_PARAM(out, x) out<< #x << "=" << x << std::endl
-
+extern std::ofstream g_logfile;
 
 class redirect_output_wrapper
 {
