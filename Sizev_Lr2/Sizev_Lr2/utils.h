@@ -7,7 +7,8 @@
 #include <vector>
 
 
-#define INPUT_LINE(in, str) getline(in>>std::ws, str); 
+#define INPUT_LINE(in, str) getline(in>>std::ws, str); \
+            std::cerr << str << std::endl
 
 #define PRINT_PARAM(out, x) out<< #x << "=" << x << std::endl
 extern std::ofstream g_logfile;
@@ -45,5 +46,6 @@ T GetCorrectNumber(T min, T max)
         std::cin.ignore(10000, '\n');
         std::cout << "Type number (" << min << "-" << max << "):";
     }
+    std::cerr << x << std::endl;
     return x;
 }

@@ -1,6 +1,9 @@
 #include "pipe.h"
 
+int Pipes::nextId = 0;
+
 void Pipes::add() {
+    id = ++nextId;
     cout << "введите название трубы: ";
     INPUT_LINE(cin, _name);
     cout << "введите размеры трубы (длину): ";
@@ -11,13 +14,13 @@ void Pipes::add() {
     _properties = GetCorrectNumber(0, 1);
 }
 void Pipes::View() const {
-    cout  << " название: " << _name << ", длина: " << _length << " ширина: " << _width << " работает ли труба (1 - работает, 0 - в ремонте): " << _properties << endl;
+    cout  <<"Id: " << id << ", название: " << _name << ", длина: " << _length << " ширина: " << _width << " работает ли труба (1 - работает, 0 - в ремонте): " << _properties << endl;
 }
 
-bool Pipes::CheakByProperities(bool properties) {
+bool Pipes::CheakByProperities(bool properties) const{
     return _properties == properties;
 }
-bool Pipes::CheakByName(string name) {
+bool Pipes::CheakByName(string name) const{
     return _name == name;
 }
 
@@ -26,12 +29,16 @@ void Pipes::Edit() {
 
 
 }
-void Pipes::SavePipe(ofstream& fout) {
-    fout << _name << " " << _length << " " << _width << " " << _properties << endl;
+void Pipes::SavePipe(ofstream& fout) const{
+    fout << id << _name << " " << _length << " " << _width << " " << _properties << endl;
 }
 void Pipes::LoadPipe(ifstream& fin) {
+    fin >> id;
     fin >> _name;
     fin >> _length;
     fin >> _width;
     fin >> _properties;
+}
+int Pipes::GetId() const {
+    return id;
 }
