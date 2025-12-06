@@ -13,9 +13,9 @@ public:
     void add();
     void View() const;
     void Edit();
-    bool CheakByName(string name);
+    bool CheakByName(string name) const;
     void SaveKC(ofstream& fin) const;
     void LoadKC(ifstream& fout);
-    double IdleWorkshops();
+    double IdleWorkshops() const;
     int GetId() const;
 };

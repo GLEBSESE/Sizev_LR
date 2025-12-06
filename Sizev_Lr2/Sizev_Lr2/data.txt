@@ -1,0 +1,9 @@
+PIPES 4
+1name 10 4 1
+2name1 10 54 1
+3name22 10 3 1
+4name4 10 4 0
+STATIONS 3
+1kc 122 2 1
+2kc2 10 6 0
+3kc3 10 4 0

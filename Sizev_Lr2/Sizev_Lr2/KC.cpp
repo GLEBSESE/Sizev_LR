@@ -16,7 +16,7 @@ void KC::View() const {
     cout <<"Id: " << id << ", Название: " << _name << ", количество цехов: " << _quantity << " количество цехов в работе: " << _count_work << " класс станции: " << _station_class << endl;
 }
 
-bool KC::CheakByName(string name) {
+bool KC::CheakByName(string name) const{
     return _name == name;
 }
 
@@ -35,7 +35,7 @@ void KC::Edit() {
 
 }
 
-double KC::IdleWorkshops() {
+double KC::IdleWorkshops() const{
     return (static_cast<double>(_quantity - _count_work) / _quantity) * 100.0;
 }
 int KC::GetId() const{
